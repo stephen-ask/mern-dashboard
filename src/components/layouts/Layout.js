@@ -1,4 +1,4 @@
-import { Sidebar } from '../Sidebar';
+import { Sidebar } from '../Sidebar/Sidebar.js';
 import { Header } from '../Header';
 
 const Layout =({children}) =>{

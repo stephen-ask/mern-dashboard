@@ -1,0 +1,18 @@
+.sidebar {
+    background-color: #000;
+    flex: 0 0 20%;
+    height: 100%;
+  @media (max-width: 768px) { 
+    & {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+.logo {
+  background-image: url('https://i.ibb.co/9628y8v/logo.png');
+  background-size: cover;
+  min-height: 200px;  
+  background-position: center;
+}

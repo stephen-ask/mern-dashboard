@@ -21,7 +21,7 @@ route.post("/login", async (req, res) => {
 
   if( checkPassword != null && checkPassword ) {
       var token = jwt.sign(req.body, process.env.SECRET_KEY);
-      resObject = { msg: "success", token: token };
+      resObject = { status: 201, msg: "success", token: token };
   } else {
     resObject = { status: 403, msg: "Unauthorised"};
   }
@@ -41,16 +41,25 @@ route.post("/register", async (req, res) => {
   res.json({ status: 'success', message: 'Registration successful', data: response});
 });
 
-route.get("/users", async (req, res) => {
-  let response = await getAllUsers();
+route.post("/forgot-password", async (req, res) => {
+  let userData = {
+    username: req.body.username,
+    password: await hashPassword(req.body.password),
+    phone: req.body.phone,
+  }
 
-  res.json({ status: 'success', data: response});
+  res.json({ status: 'success', message: 'password send to email'});
 });
 
-route.get("/users/:id", async (req, res) => {
-  let response = await getAllUsers();
+route.post("/reset-password", async (req, res) => {
+  let userData = {
+    username: req.body.username,
+    password: await hashPassword(req.body.password),
+    phone: req.body.phone,
+  }
 
-  res.json({ status: 'success', data: response});
+  res.json({ status: 'success', message: 'reset password successful'});
 });
+
 
 export default route;

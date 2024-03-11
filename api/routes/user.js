@@ -19,4 +19,15 @@ userRoutes.use((req, res, next) => {
   }
 });
 
+userRoutes.get("/users", async (req, res) => {
+  let response = await getAllUsers();
+
+  res.json({ users: response });
+});
+
+userRoutes.get("/users/:id", async (req, res) => {
+  let response = await getAllUsers();
+
+  res.json({ data: response });
+});
 export default userRoutes;

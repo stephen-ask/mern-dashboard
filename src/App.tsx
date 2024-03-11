@@ -1,31 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
 import Layout from './components/layouts/Layout';
-import {useUsersQuery} from './services/usersApi';
+import { UserDataComponent } from './components/UserListing/'
+import { useRoutes } from "react-router-dom";
+import { Dashboard } from './pages/Dashboard/Dashbaord';
+import Login from './pages/Login/Login';
+// import Register from './pages/Register/Register';
+import { useDispatch, useSelector } from'react-redux';
 
 function App() {
-  const {data, error, isLoading, isFetching, isSuccess } = useUsersQuery();
  
+  const routes = useRoutes([
+      {
+        path: "/",
+        children: [
+          {
+            path: "/",
+            element: <UserDataComponent />,
+          },
+          {
+            path: "login",
+            element: <Login />,
+          },
+          
+        ],
+      }
+    ]);
+
   return (
-    <div className="App">
-     <Layout> 
-      {isLoading && <h2>...Loading</h2>}
-      {isFetching && <h2>...isFetching</h2>}
-      {error && <h2>Something went wrong</h2>}
-      { isSuccess &&  (
-          <div>{
-              data.map(user => (
-                <div key={user.id}>
-                  <h2>{user.username}</h2>
-                  <p>{user.email}</p>
-                </div>
-              ))
-            }</div>
-        )
-      } </Layout>
-    </div>
+    <Layout>
+      {routes}
+    </Layout>
   );
 }
+
+
+
 
 export default App;
